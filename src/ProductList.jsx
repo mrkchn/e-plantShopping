@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './ProductList.css'
 import CartItem from './CartItem';
-import { addItem } from './CartSlice'
+import CartSlice, { addItem } from './CartSlice'
 
 function ProductList() {
     const dispatch = useDispatch();
@@ -302,7 +302,7 @@ function ProductList() {
                         <img className="product-image" src={plant.image} alt={plant.name} />
                         <div className="product-title">{plant.name}</div>
                         {/*Similarly like the above plant.name show other details like description and cost*/}
-                        <button  className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                        {cart.items.find(item => item.name === plant.name) ? <button  className="product-button-disabled">In Cart</button>: <button  className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>} 
                     </div>
                     ))}
                 </div>
